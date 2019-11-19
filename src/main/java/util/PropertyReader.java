@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.util.Properties;
 
-class PropertyReader {
+public class PropertyReader {
     private  static Properties properties;
     static {
         try {
@@ -15,7 +15,7 @@ class PropertyReader {
             System.out.println("Error: config.properties is absent!");
         }
     }
-    static String getProperty(String prop) {
+    public static String getProperty(String prop) {
         return properties.getProperty(prop);
     }
  }

@@ -1,34 +1,22 @@
 package util;
 
-import exception.DBException;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBHelper {
-    public static Connection getConnection() throws DBException {
+    public static Connection getConnection() throws RuntimeException {
         try {
             Class.forName(PropertyReader.getProperty("jdbcSqlDriver"));
             return DriverManager.getConnection(PropertyReader.getProperty("jdbcURL"),
                     PropertyReader.getProperty("jdbcUsername"),
                     PropertyReader.getProperty("jdbcPassword"));
         } catch (SQLException | ClassNotFoundException e) {
-            throw new DBException(e);
+            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-    }
-
-    private static SessionFactory sessionFactory;
-
-    public static SessionFactory getSessionFactory(Class[] classes) {
-        if (sessionFactory == null) {
-            sessionFactory = createSessionFactory(classes);
-        }
-        return sessionFactory;
     }
 
     private static void setConfigurationPropertyForName(Configuration configuration, String name)  {
@@ -36,7 +24,7 @@ public class DBHelper {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    private static Configuration getMySqlConfiguration(Class[] classes) {
+    public static Configuration getConfiguration(Class[] classes) {
         Configuration configuration = new Configuration();
         for (Class concreteClass : classes) {
             configuration.addAnnotatedClass(concreteClass);
@@ -54,11 +42,4 @@ public class DBHelper {
         return configuration;
     }
 
-    private static SessionFactory createSessionFactory(Class[] classes) {
-        Configuration configuration = getMySqlConfiguration(classes);
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
-        return configuration.buildSessionFactory(serviceRegistry);
-    }
 }
