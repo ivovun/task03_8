@@ -14,9 +14,7 @@ public class PropertyReader {
             URL url = Thread.currentThread().getContextClassLoader().getResource("config.properties");
             if (url != null) {
                 properties.load(new FileInputStream(url.getPath()));
-
             }
-
         } catch (IOException | NullPointerException e) {
             System.out.println( "Error: config.properties is absent!!");
         }
