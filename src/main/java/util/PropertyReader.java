@@ -12,6 +12,7 @@ public class PropertyReader {
         try {
             properties = new Properties();
             URL url = Thread.currentThread().getContextClassLoader().getResource("config.properties");
+            // пришлось проверку поставить  иначе идет  Warning: Method invocation 'getPath' may produce 'NullPointerException'
             if (url != null) {
                 properties.load(new FileInputStream(url.getPath()));
             }
