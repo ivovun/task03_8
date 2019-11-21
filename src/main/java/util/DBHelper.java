@@ -9,10 +9,10 @@ import java.sql.SQLException;
 public class DBHelper {
     public static Connection getConnection() throws RuntimeException {
         try {
-            Class.forName(PropertyReader.getProperty("jdbcSqlDriver"));
-            return DriverManager.getConnection(PropertyReader.getProperty("jdbcURL"),
-                    PropertyReader.getProperty("jdbcUsername"),
-                    PropertyReader.getProperty("jdbcPassword"));
+            Class.forName(PropertyReader.getProperty("jdbc_driver_class"));
+            return DriverManager.getConnection(PropertyReader.getProperty("jdbc_connection_url"),
+                    PropertyReader.getProperty("databaseUsername"),
+                    PropertyReader.getProperty("databasePassword"));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -31,11 +31,11 @@ public class DBHelper {
         }
 
         setConfigurationPropertyForName(configuration, "hibernate.dialect");
-        setConfigurationPropertyForName(configuration, "hibernate.connection.driver_class");
-        setConfigurationPropertyForName(configuration, "hibernate.connection.url");
-        setConfigurationPropertyForName(configuration, "hibernate.connection.serverTimezone");
-        setConfigurationPropertyForName(configuration, "hibernate.connection.username");
-        setConfigurationPropertyForName(configuration, "hibernate.connection.password");
+        setConfigurationPropertyForName(configuration, "jdbc_driver_class");
+        setConfigurationPropertyForName(configuration, "jdbc_connection_url");
+        setConfigurationPropertyForName(configuration, "serverTimezone");
+        setConfigurationPropertyForName(configuration, "databaseUsername");
+        setConfigurationPropertyForName(configuration, "databasePassword");
         setConfigurationPropertyForName(configuration, "hibernate.show_sql");
         setConfigurationPropertyForName(configuration, "hibernate.hbm2ddl.auto");
 
