@@ -31,14 +31,13 @@ public class DBHelper {
         }
 
         setConfigurationPropertyForName(configuration, "hibernate.dialect");
-        setConfigurationPropertyForName(configuration, "jdbc_driver_class");
-        setConfigurationPropertyForName(configuration, "jdbc_connection_url");
-        setConfigurationPropertyForName(configuration, "serverTimezone");
-        setConfigurationPropertyForName(configuration, "databaseUsername");
-        setConfigurationPropertyForName(configuration, "databasePassword");
+        setConfigurationPropertyForName(configuration, "hibernate.connection.driver_class");
+        setConfigurationPropertyForName(configuration, "hibernate.connection.url");
+        setConfigurationPropertyForName(configuration, "hibernate.connection.serverTimezone");
+        setConfigurationPropertyForName(configuration, "hibernate.connection.username");
+        setConfigurationPropertyForName(configuration, "hibernate.connection.password");
         setConfigurationPropertyForName(configuration, "hibernate.show_sql");
         setConfigurationPropertyForName(configuration, "hibernate.hbm2ddl.auto");
-
         return configuration;
     }
 

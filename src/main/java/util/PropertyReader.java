@@ -13,6 +13,7 @@ public class PropertyReader {
         properties = new Properties();
         loadProperties(properties, "common.properties");
         loadProperties(properties, "hibernate.properties");
+        loadProperties(properties, "jdbc.properties");
     }
 
     private static void loadProperties(Properties properties, String name) {
